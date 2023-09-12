@@ -1,0 +1,9 @@
+Method Overloading: Same name diff(number, type, or order of parameters).
+
+In compile-time polymorphism, the decision about which method or function to call is made by the compiler based on the number, types, and order of arguments.
+
+
+Method Overriding: to provide a specific implementation for a method that is already defined in the parent class.
+Same name, return type, and parameters as the method in the parent class.
+
+In runtime polymorphism, the decision about which method to call is made during program execution based on the actual object's type.
