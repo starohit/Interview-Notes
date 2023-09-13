@@ -1,0 +1,106 @@
+// console.log("hey 🍉")
+
+// console.log(global.v)
+// global.v ='22'
+// console.log(global.v)
+
+// console.log(process.platform)
+
+// console.log(process.env.Username)
+
+------------------------------------------------------------
+/* Event Callback */
+------------------------------------------------------------
+const { EventEmitter} = require('events')
+const myEmitter = new EventEmitter();
+
+myEmitter.on('lunch', () => {
+    console.log("yummy 🍰")
+})
+
+myEmitter.emit('lunch')
+
+-------------------------------------------------------------
+/* File System */
+------------------------------------------------------------
+const { readFile, readFileSync } = require('fs')
+
+const txt = readFileSync('./hello.txt', 'utf-8')
+console.log(txt)
+
+/* Using Promises */
+
+const { readFile } = require('fs').promises;
+
+async function hello() {
+    const file = await readFile('./hello.txt', 'utf8')
+    console.log(file)
+}
+
+hello()
+
+-----------------------------------------------------------
+/* modules */
+-----------------------------------------------------------
+//index.js
+const myMod = require('./MY-mod.js')
+
+console.log(myMod)
+
+//MY-mod.js
+module.exports={
+    Name:'King'
+}
+
+------------------------------------------------------------
+/*Express*/
+------------------------------------------------------------
+//home.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>I am a full Stack Web Developer now</h1>
+</body>
+</html>
+
+//index.js
+const express = require('express')
+const { readFile } = require('fs')
+const { request } = require('http')
+
+const app = express()
+
+app.get('/', (request,response)=>{
+    readFile('./home.html', 'utf-8', (err,html)=>{
+        if(err){
+            response.status(500).send('Sorry, Out of order')
+        }
+        response.send(html);
+    })
+})
+
+app.listen(process.env.PORT || 3000, () => console.log('App Available on http://localhost:3000'))
+------------------------------------------------------------
+/* Same Using Promises */
+----------------------------------------------------------
+const express = require('express')
+const { request } = require('http')
+const { readFile } = require('fs').promises
+const app = express()
+
+app.get('/', async(request, response)=>{
+    response.send(await readFile('./home.html', 'utf-8'))
+})
+
+app.listen(process.env.PORT || 3000, () => console.log('App Available on http://localhost:3000'))
